@@ -45,7 +45,7 @@
         <br><br>
         <input type="password" placeholder="Senha">
         <br><br>
-        <button>Enviar</button>
+        <a href="../Modelo/Crud.php" class="btn btn-primary">Enviar</a>
         <br>
     </div>
 

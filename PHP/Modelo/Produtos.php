@@ -58,7 +58,7 @@
                     <img src="../Modelo/Imagens/elonmusk.jpg" class="card-img-top" alt="Capa do Livro 2">
                     <div class="card-body">
                         <h5 class="card-title">Elon Musk</h5>
-                        <p class="card-text">Autor: Elon Musk 2</p>
+                        <p class="card-text">Autor: Elon Musk</p>
                         <p class="card-text">Uma biografia fascinante de um dos empreendedores mais inovadores do nosso tempo.</p>
                         <a href="../Modelo/Compra.php" class="btn btn-primary">Comprar</a>
                     </div>

@@ -1,4 +1,12 @@
-<?php namespace Projeto\Livraria2\PHP\Modelo;  ?>
+<?php namespace Projeto\Livraria2\PHP\Modelo;  
+      require_once('DAO/Conexao.php');
+      require_once('DAO/Inserir.php');
+      
+
+      Use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
+      Use Projeto\Livraria2\PHP\Modelo\DAO\Inserir;
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +107,24 @@
             </div>
 
             <!-- Botão de Envio -->
-            <button type="submit" class="btn btn-primary">Finalizar Compra</button>
+            <button type="submit" class="btn btn-primary">Finalizar Compra
+            <?php
+                $numeroCartao = $_POST['numeroCartao'];
+                $nomeCartao = $_POST['nomeCartao'];
+                $validade   = $_POST['validade'];
+                $codigo = $_POST['codigo'];
+                $endereco = $_POST['endereco'];
+                $cidade = $_POST['cidade'];
+                $estado = $_POST['estado'];
+                $cep = $_POST['cep'];
+                $pais = $_POST['pais'];
+                $telefone = $_POST['telefone'];
+
+                $conexao = new Conexao();          
+                $compras = new Inserir();
+                echo $compra->compraLivro($conexao, $numeroCartao, $nomeCartao, $validade, $codigo, $endereco,$cidade,$estado,$cep,$pais,$telefone);
+            ?>
+            </button>
         </form>
     </div>
 

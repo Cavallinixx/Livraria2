@@ -1,19 +1,54 @@
 <?php
-    namespace Projeto\Livraria2\PHP\Modelo\DAO;
+namespace Projeto\Livraria2\PHP\Modelo;
 
-    class Conexao{
+require_once('DAO/Conexao.php');
 
-        function conectar(){
-            try{
-                $conn = mysqli_connect('localhost','root','','livrariati18n');
-                if($conn){
-                    echo "<br>Conectado com Sucesso!";
-                    return $conn;
+use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
+
+class Consultar {
+
+   
+    function consultarIndividual(
+        Conexao $conexao,
+        string $nomeTabela,
+        string $cpf
+    ) {
+        try {
+            $conn = $conexao->conectar();
+            $sql = "SELECT * FROM $nomeTabela WHERE cpf = '$cpf'";
+            $result = mysqli_query($conn, $sql);
+
+            while ($dados = mysqli_fetch_Array($result)) {
+                if ($dados["cpf"] == $cpf) {
+                    echo "\nCPF: " . $dados["cpf"] .
+                         "\nNome: " . $dados["nome"] .
+                         "\nUsuário: " . $dados["usuario"] .
+                         "\nTelefone: " . $dados["telefone"];
+                    return; // Encerrando o processo
                 }
-                echo "<br>Algo deu errado!";
-            }catch(Except $erro){
-                return $erro;
             }
-        }//fim do conectar
-    }//fim da classe
+            echo "CPF digitado não é válido!";
+        } catch (Exception $erro) {
+            echo $erro;
+        }
+    }
+
+    // Método para consultar todos os registros na tabela
+    function consultarTudo(Conexao $conexao, string $nomeTabela) {
+        try {
+            $conn = $conexao->conectar();
+            $sql = "SELECT * FROM $nomeTabela";
+            $result = mysqli_query($conn, $sql);
+
+            while ($dados = mysqli_fetch_Array($result)) {
+                echo "<br>CPF: " . $dados["cpf"] .
+                     "<br>Nome: " . $dados["nome"] .
+                     "<br>Usuário: " . $dados["usuario"] .
+                     "<br>Telefone: " . $dados["telefone"];
+            }
+        } catch (Exception $erro) {
+            echo $erro;
+        }
+    }
+}
 ?>

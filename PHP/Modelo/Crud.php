@@ -29,7 +29,7 @@
             <div class="btn">
                 <a href="excluir.php" class="btn btn-danger">Excluir</a>
             </div>
-            <p class="signin">Já tem uma conta? <a href="/login">Entrar</a></p>
+            <p class="signin">Não é Adm? <a href="../Modelo/Login.php">Entrar</a></p>
         </form>
         <br><br><br><br>
     </div>

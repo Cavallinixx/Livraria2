@@ -2,7 +2,9 @@
 
 namespace Projeto\Livraria2\PHP\Modelo\DAO;
 require_once('Conexao.php');
+require_once('Cadastrar.php');
 use PHP\Modelo\DAO\Conexao;
+use PHP\Modelo\Cadastrar;
 
 class Excluir{
 
@@ -10,7 +12,7 @@ class Excluir{
 
         try{
             $conn = $conexao->conectar();
-            $sql = "delete from cliente where cpf = '$cpf'";
+            $sql = "delete from cadastro where cpf = '$cpf'";
             $result = mysqli_query($conn,$sql);
 
             mysqli_close($conn);

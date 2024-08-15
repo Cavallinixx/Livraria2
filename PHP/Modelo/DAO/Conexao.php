@@ -18,4 +18,22 @@
             }
         }//fim do conectar
     }//fim da classe
+
+    class Login {
+        public function verificarUsuario(Conexao $conexao, string $usuario, string $senha) {
+            try {
+                $conn = $conexao->conectar();
+                $sql = "SELECT * FROM cadastrar WHERE usuario = '$usuario' AND senha = '$senha'";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    return true; // Usuário e senha estão corretos
+                } else {
+                    return false; // Usuário ou senha incorretos
+                }
+            } catch (Exception $erro) {
+                echo $erro;
+            }
+        }
+    }
 ?>

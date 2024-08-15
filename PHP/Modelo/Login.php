@@ -22,8 +22,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" style="color: rgb(0, 0, 0);" href="#">Pagina Inicial</a>
-                    </li>
+                        <a class="nav-link active" aria-current="page" style="color: rgb(0, 0, 0);" href="../Modelo/Login.php">Pagina Inicial</a>
+                    </li> 
                     <li class="nav-item">
                         <a href="../Modelo/Produtos.php"class="nav-link" style="color: rgb(0, 0, 0)" >Produtos</a>
                     </li>
@@ -43,7 +43,30 @@
         <br><br>
         <input type="password" placeholder="Senha">
         <br><br>
-        <button>Enviar</button>
+        <button>Enviar
+        <?php
+        
+    
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $usuario = $_POST['usuario'];
+                $senha = $_POST['senha'];
+    
+                $conexao = new Conexao();
+                $login = new Login();
+    
+                if ($login->verificarUsuario($conexao, $usuario, $senha)) {
+                    echo "('Login realizado com sucesso!')";
+                    // Redireciona para a página Produtos.php
+                    header("Location: Produtos.php");
+                    
+                } else {
+                    echo "<script>alert('Usuário ou senha incorretos!');</script>";
+                }
+            }
+            ?>
+   
+
+        </button>
         <br><br>
         <!-- Corrigido o botão para um link -->
         <a href="../Modelo/Cadastrar.php" class="btn btn-primary">Cadastrar</a>
