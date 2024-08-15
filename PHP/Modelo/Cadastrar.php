@@ -1,3 +1,10 @@
+<?php namespace Projeto\Livraria2\PHP\Modelo;  
+      require_once('DAO/Conexao.php');
+      require_once('DAO/Inserir.php');
+      Use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
+      Use Projeto\Livraria2\PHP\Modelo\DAO\Inserir;
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +45,12 @@
     <br><br>
     <div class="container">
         <h2 class="text-center">Cadastro</h2>
-        <form>
+        <form method="POST">
+        <div class="mb-3">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome" required>
+            </div>
+
             <div class="mb-3">
                 <label for="usuario" class="form-label">Usuário:</label>
                 <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Digite seu usuário" required>
@@ -54,21 +66,29 @@
                 <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="Digite seu telefone" required>
             </div>
         
-            <div class="mb-3">
-                <label for="idade" class="form-label">Idade:</label>
-                <input type="number" id="idade" name="idade" class="form-control" placeholder="Digite sua idade" required>
-            </div>
         
             <div class="mb-3">
-                <label for="cep" class="form-label">CEP:</label>
-                <input type="text" id="cep" name="cep" class="form-control" placeholder="Digite seu CEP" required>
+                <label for="cpf" class="form-label">CPF:</label>
+                <input type="number" id="cpf" name="cpf" class="form-control" placeholder="Digite seu CPF" required>
             </div>
         
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar
+            <?php
+                $nome = $_POST['nome'];
+                $usuario = $_POST['usuario'];
+                $senha   = $_POST['senha'];
+                $telefone = $_POST['telefone'];
+                $cpf = $_POST['cpf'];
+
+                $conexao = new Conexao();          
+                $cadastrar = new Inserir();
+                echo $cadastrar->cadastrarCliente($conexao, $nome, $usuario, $senha, $telefone, $cpf);
+
+            ?>
+            </button>
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
 </body>
 </html>

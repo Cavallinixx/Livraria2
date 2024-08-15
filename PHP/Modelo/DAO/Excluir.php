@@ -1,6 +1,6 @@
 <?php
 
-namespace PHP\Modelo\DAO;
+namespace Projeto\Livraria2\PHP\Modelo\DAO;
 require_once('Conexao.php');
 use PHP\Modelo\DAO\Conexao;
 

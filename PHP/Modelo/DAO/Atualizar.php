@@ -1,8 +1,9 @@
 <?php
 
-    namespace PHP\Modelo\DAO;
-    require_once('Conexao.php');
-    use PHP\Modelo\DAO\Conexao;
+namespace Projeto\Livraria2\PHP\Modelo\DAO;  
+require_once('Conexao.php');
+
+use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
 
 
     class Atualizar{

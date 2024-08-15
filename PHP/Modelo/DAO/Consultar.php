@@ -1,5 +1,5 @@
 <?php
-    namespace PHP\Modelo\DAO;
+    namespace Projeto\Livraria2\PHP\Modelo\DAO;
 
     class Conexao{
 

@@ -1,5 +1,7 @@
 <?php
-    namespace PHP\Modelo\DAO;
+    namespace Projeto\Livraria2\PHP\Modelo\DAO;
+    require_once("Conexao.php");
+    Use Projeto\Livraria2\PHP\Modelo\DAO;
 
     class Conexao{
 

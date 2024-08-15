@@ -1,3 +1,4 @@
+<?php namespace Projeto\Livraria2\PHP\Modelo;  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,6 @@
             <p class="submit">Escolha a opção desejada: </p>
             <div class="btn">
                 <a href="listar.php" class="btn btn-secondary">Consultar</a>
-                
             </div>
             <div class="btn">
                 <a href="listar_individual.php" class="btn btn-secondary">Consultar Individual</a>

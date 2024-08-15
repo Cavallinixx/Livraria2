@@ -1,10 +1,10 @@
 <?php
-    namespace PHP\Modelo\DAO;
+    namespace Projeto\Livraria2\PHP\Modelo\DAO;
 
     require_once('Conexao.php');
     
 
-    use PHP\Modelo\DAO\Conexao;
+    use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
 
     class Inserir{
         public Conexao $conexao;
@@ -28,19 +28,18 @@
         {
             try{
                 $conn = $conexao->conectar();//Abrir a conexão com o banco
-                $sql  = "Insert into cliente 
-                (nome, usuario, senha, telefone, cpf) 
-                values ('$nome','$usuario','$senha',
-                '$telefone','$cpf')";
+                $sql  = "Insert into cadastrar(codigo, nome, usuario, senha, telefone, cpf) values ('','$nome','$usuario','$senha','$telefone','$cpf')";
                 $result = mysqli_query($conn, $sql);
 
-                //Fechar a conexão
-                mysqli_close($conn);
+                
 
                 if($result){
                     return "<br>Inserido com sucesso!";
                 }
                 return "<br><br>Não inserido!";
+
+                //Fechar a conexão
+                mysqli_close($conn);
             }catch(Except $erro){
                 return $erro;
             }
