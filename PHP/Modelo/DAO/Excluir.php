@@ -1,33 +1,31 @@
 <?php
 
 namespace Projeto\Livraria2\PHP\Modelo\DAO;
+
 require_once('Conexao.php');
-require_once('Cadastrar.php');
-use PHP\Modelo\DAO\Conexao;
-use PHP\Modelo\Cadastrar;
 
-class Excluir{
+use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
 
-    function excluirCliente(Conexao $conexao,string $cpf){
+class Excluir {
 
-        try{
+    public function excluirCliente(Conexao $conexao, string $nome) {
+        try {
             $conn = $conexao->conectar();
-            $sql = "delete from cadastro where cpf = '$cpf'";
-            $result = mysqli_query($conn,$sql);
-
+            $sql = "DELETE FROM cadastrar WHERE nome = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $nome);
+            $result = $stmt->execute();
+            $stmt->close();
             mysqli_close($conn);
-            if($result){
-                echo "Excluido com sucesso!";
-            }else{
-                echo "Não foi possivel excluir";
+
+            if ($result) {
+                echo "Excluído com sucesso!";
+            } else {
+                echo "Não foi possível excluir.";
             }
 
-        }catch(Exception $erro){
-            echo $erro;
-        }//fim do catch
-    }//fim do metodo
-
-
-}//fim da classe
-
-?>
+        } catch (Exception $erro) {
+            echo "Erro: " . $erro->getMessage();
+        }
+    }
+}

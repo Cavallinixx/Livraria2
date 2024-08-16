@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">AlviVerde</a>
@@ -35,11 +35,11 @@
         </div>
     </nav>
     <br><br><br>
-    <!-- Seção de Livros -->
+    
     <div class="container mt-4">
        
         <div class="row">
-            <!-- Livro 1 -->
+           
             <div class="col-md-4">
                 <div class="card mb-4">
                     <img src="../Modelo/Imagens/abelLivro.jpg" class="card-img-top" alt="Capa do Livro 1">
@@ -47,12 +47,12 @@
                         <h5 class="card-title">Cabeça Fria Coração Quente</h5>
                         <p class="card-text">Autor: Abel Ferreira</p>
                         <p class="card-text">Debruça-se sobre as táticas usadas em campo e fora de campo para alcançar duas taças da Libertadores.</p>
-                        <a href="../Modelo/Compra.php" class="btn btn-primary">Comprar</a>
+                        <a href="../Modelo/Compra.php" class="btn btn-primary d-grid gap-2">Comprar</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Livro 2 -->
+            
             <div class="col-md-4">
                 <div class="card mb-4">
                     <img src="../Modelo/Imagens/elonmusk.jpg" class="card-img-top" alt="Capa do Livro 2">
@@ -60,12 +60,12 @@
                         <h5 class="card-title">Elon Musk</h5>
                         <p class="card-text">Autor: Elon Musk</p>
                         <p class="card-text">Uma biografia fascinante de um dos empreendedores mais inovadores do nosso tempo.</p>
-                        <a href="../Modelo/Compra.php" class="btn btn-primary">Comprar</a>
+                        <a href="../Modelo/Compra.php" class="btn btn-primary d-grid gap-2">Comprar</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Livro 3 -->
+           
             <div class="col-md-4">
                 <div class="card mb-4">
                     <img src="../Modelo/Imagens/lebron.jpg" class="card-img-top" alt="Capa do Livro 3">
@@ -73,14 +73,14 @@
                         <h5 class="card-title">LeBron</h5>
                         <p class="card-text">Autor: LeBron</p>
                         <p class="card-text">A jornada inspiradora de um dos maiores jogadores de basquete de todos os tempos.</p>
-                        <a href="../Modelo/Compra.php" class="btn btn-primary">Comprar</a>
+                        <a href="../Modelo/Compra.php" class="btn btn-primary d-grid gap-2">Comprar</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Rodapé -->
+    
     <footer class="bg-light text-center py-3 mt-4">
         <p>&copy; 2024 AlviVerde. Todos os direitos reservados.</p>
     </footer>

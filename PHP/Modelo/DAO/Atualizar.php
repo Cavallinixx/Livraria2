@@ -8,10 +8,10 @@ use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
 
     class Atualizar{
 
-        function atualizarCliente(Conexao $conexao,string $campo,string $novoDado,string $cpf){
+        function atualizarUsuario(Conexao $conexao,string $campo,string $novoDado,string $nome){
             try{
                 $conn = $conexao->conectar();
-                $sql = "update cliente set $campo = '$novoDado' where cpf = '$cpf'";
+                $sql = "update cadastrar set $campo = '$novoDado' where nome = '$nome'";
                 $result = mysqli_query($conn, $sql);
 
                 mysqli_close($conn);

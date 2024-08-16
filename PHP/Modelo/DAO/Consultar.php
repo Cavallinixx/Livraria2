@@ -1,6 +1,6 @@
 <?php
 
-namespace Projeto\Livraria2\PHP\Modelo;
+namespace Projeto\Livraria2\PHP\Modelo\DAO;
 
 require_once('DAO/Conexao.php');
 use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
@@ -18,9 +18,9 @@ class Consultar {
             $conn = $conexao->conectar();
             $sql = "SELECT * FROM $nomeTabela WHERE $nomeCampo = '$codigo'";
             $result = mysqli_query($conn, $sql);
-
-            while ($dados = mysqli_fetch_Array($result)) {
-                if ($dados["cpf"] == $codigo) {
+    
+            if ($result) {
+                while ($dados = mysqli_fetch_Array($result)) {
                     echo "\nNome: " . $dados["nome"] .
                          "\nUsuário: " . $dados["usuario"].
                          "\nSenha: " . $dados["senha"] .
@@ -28,13 +28,15 @@ class Consultar {
                          "\nCPF: " . $dados["cpf"];
                     return; // Encerrando o processo
                 }
+                echo "Registro não encontrado!";
+            } else {
+                echo "Erro na consulta: " . mysqli_error($conn);
             }
-            echo "CPF digitado não é válido!";
         } catch (Exception $erro) {
             echo $erro;
         }
     }
-
+    
     // Método para consultar todos os registros na tabela
     function consultarTudo(Conexao $conexao, string $nomeTabela) {
         try {

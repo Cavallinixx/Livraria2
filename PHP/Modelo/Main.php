@@ -24,5 +24,7 @@
     $consultar = new Consultar();
     $excluir = new Excluir();
     $inserir = new Inserir();
+
+ 
     
 ?>

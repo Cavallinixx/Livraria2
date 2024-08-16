@@ -1,4 +1,13 @@
-<?php namespace Projeto\Livraria2\PHP\Modelo;  ?>
+<?php 
+namespace Projeto\Livraria2\PHP\Modelo;
+
+require_once 'DAO/Conexao.php';
+
+use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
+use Projeto\Livraria2\PHP\Modelo\DAO\Login;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +17,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    
     <title>Login</title>
 </head>
 <body>
@@ -25,9 +33,8 @@
                         <a class="nav-link active" aria-current="page" style="color: rgb(0, 0, 0);" href="../Modelo/Login.php">Pagina Inicial</a>
                     </li> 
                     <li class="nav-item">
-                        <a href="../Modelo/Produtos.php"class="nav-link" style="color: rgb(0, 0, 0)" >Produtos</a>
+                        <a href="../Modelo/Produtos.php" class="nav-link" style="color: rgb(0, 0, 0);">Produtos</a>
                     </li>
-                    
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
@@ -39,36 +46,59 @@
   
     <div class="login">
         <h1>Login</h1>
-        <input type="text" placeholder="Nome">
-        <br><br>
-        <input type="password" placeholder="Senha">
-        <br><br>
-        <button>Enviar
-        <?php
-        
-    
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $usuario = $_POST['usuario'];
-                $senha = $_POST['senha'];
-    
-                $conexao = new Conexao();
-                $login = new Login();
-    
-                if ($login->verificarUsuario($conexao, $usuario, $senha)) {
-                    echo "('Login realizado com sucesso!')";
-                    // Redireciona para a página Produtos.php
-                    header("Location: Produtos.php");
+        <!-- Formulário de login -->
+        <form method="POST" action="Login.php">
+            <input type="text" name="usuario" placeholder="Nome">
+            <br><br>
+            <input type="password" name="senha" placeholder="Senha">
+            <br><br>
+            <button type="submit">Enviar
+                <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $usuario = $_POST['usuario'];
+                        $senha = $_POST['senha'];
                     
-                } else {
-                    echo "<script>alert('Usuário ou senha incorretos!');</script>";
-                }
-            }
-            ?>
-   
+                        // Conectar ao banco de dados
+                        $conexao = new Conexao();
+                        $conn = $conexao->conectar();
+                        echo "<br><br>";
+                    
+                        // Preparar e executar a consulta
+                        $sql = "SELECT senha FROM cadastrar WHERE usuario = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("s", $usuario);
+                        $stmt->execute();
+                        $stmt->store_result();
+                    
+                        if ($stmt->num_rows > 0) {
+                            $stmt->bind_result($senhaBanco);
+                            $stmt->fetch();
+                    
+                            // Verificar a senha
+                            if ($senha === $senhaBanco) {
+                                // Login bem-sucedido
+                                $_SESSION['usuario'] = $usuario;
+                                header("Location: Produtos.php");
+                                exit();
+                            } else {
+                                echo "<br>Senha ou login incorreto!";
+                            }
+                        } else {
+                            // Usuário não encontrado
+                            echo "Usuário não encontrado!";
+                        }
+                    
+                        $stmt->close();
+                        $conn->close();
+                    }
+                    ?>
+               
+            </button>
+        </form>
 
-        </button>
+        
         <br><br>
-        <!-- Corrigido o botão para um link -->
+        <!-- Links corrigidos -->
         <a href="../Modelo/Cadastrar.php" class="btn btn-primary">Cadastrar</a>
         <a href="../Modelo/Admin.php" class="btn btn-primary">Administrador</a>
     </div>
