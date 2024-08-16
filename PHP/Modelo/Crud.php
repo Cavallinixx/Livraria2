@@ -1,4 +1,12 @@
-<?php namespace Projeto\Livraria2\PHP\Modelo;  ?>
+<?php namespace Projeto\Livraria2\PHP\Modelo;  
+
+    require_once('DAO/Conexao.php');
+   
+    
+    use PHP\Modelo\DAO\Conexao;
+    
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +22,61 @@
     <div class="p-3 mb-2 bg-black text-white">
         <h2>Seja Bem-Vindo, ADM!!</h2>
         <br><br>
-        <form class="form" action="/cadastrarUsuario" method="POST">
+        <form class="form"  method="POST">
             <p class="title">CRUD </p>
             <p class="submit">Escolha a opção desejada: </p>
             <div class="btn">
-                <a href="listar.php" class="btn btn-secondary">Consultar</a>
+                <a class="btn btn-secondary">Consultar
+                    <?php
+
+                   function consultarTudo(Conexao $conexao, string $nomeTabela) {
+                    try {
+                        $conn = $conexao->conectar();
+                        $sql = "SELECT * FROM $nomeTabela";
+                        $result = mysqli_query($conn, $sql);
+            
+                        while ($dados = mysqli_fetch_Array($result)) {
+                            echo "<br>Nome: " . $dados["nome"] .
+                                 "<br>Usuário: " . $dados["usuario"] .
+                                 "<br>Telefone: " . $dados["telefone"].
+                                 "<br>CPF: " . $dados["cpf"];
+                        }
+                    } catch (Exception $erro) {
+                        echo $erro;
+                    }
+                }
+            
+                    ?>
+                </a>
             </div>
             <div class="btn">
-                <a href="listar_individual.php" class="btn btn-secondary">Consultar Individual</a>
+                <a class="btn btn-secondary">Consultar Individual
+                <?php
+                    echo $consultar->consultarIndividual($conexao,$nomeTabela,$nomeCampo,$codigo);
+
+                    try {
+                        $conn = $conexao->conectar();
+                        $sql = "SELECT * FROM $nomeTabela WHERE $nomeCampo = '$codigo'";
+                        $result = mysqli_query($conn, $sql);
+            
+                        while ($dados = mysqli_fetch_Array($result)) {
+                            if ($dados["cpf"] == $codigo) {
+                                echo "\nNome: " . $dados["nome"] .
+                                     "\nUsuário: " . $dados["usuario"].
+                                     "\nSenha: " . $dados["senha"] .
+                                     "\nTelefone: " . $dados["telefone"].
+                                     "\nCPF: " . $dados["cpf"];
+                                return; // Encerrando o processo
+                            }
+                        }
+                        echo "CPF digitado não é válido!";
+                    }
+
+                        $conexao = new Conexao(); 
+                    $consultar = new Consultar();
+
+               ?>
+                </a>
             </div>
             <div class="btn">
                 <a href="atualizar.php" class="btn btn-secondary">Atualizar</a>

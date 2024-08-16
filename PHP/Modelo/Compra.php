@@ -1,8 +1,6 @@
 <?php namespace Projeto\Livraria2\PHP\Modelo;  
       require_once('DAO/Conexao.php');
       require_once('DAO/Inserir.php');
-      
-
       Use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
       Use Projeto\Livraria2\PHP\Modelo\DAO\Inserir;
     
@@ -48,65 +46,41 @@
     <div class="compra">
         <h2>Informações de Compra</h2>
       
-        <form action="processar_compra.php" method="POST">
-            <!-- Número do Cartão -->
+        <form method="POST">
+            
             <div class="mb-3">
                 <label for="numeroCartao" class="form-label">Número do Cartão</label>
                 <input type="text" class="form-control" id="numeroCartao" name="numeroCartao" placeholder="Digite o número do cartão" required>
             </div>
 
-            <!-- Nome no Cartão -->
             <div class="mb-3">
                 <label for="nomeCartao" class="form-label">Nome no Cartão</label>
                 <input type="text" class="form-control" id="nomeCartao" name="nomeCartao" placeholder="Digite o nome como aparece no cartão" required>
             </div>
 
-            <!-- Validade -->
             <div class="mb-3">
                 <label for="validade" class="form-label">Validade</label>
                 <input type="text" class="form-control" id="validade" name="validade" placeholder="MM/AA" required>
             </div>
 
-            <!-- Código de Segurança -->
             <div class="mb-3">
                 <label for="codigo" class="form-label">Código de Segurança (CVV)</label>
                 <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Digite o CVV" required>
             </div>
 
-            <!-- Endereço de Cobrança -->
             <h4>Endereço de Cobrança</h4>
             <div class="mb-3">
                 <label for="endereco" class="form-label">Endereço</label>
                 <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Digite seu endereço" required>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite sua cidade" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="estado" class="form-label">Estado</label>
-                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Digite seu estado" required>
-                </div>
-            </div>
-            <div class="row">
+            
+            <div class="mb-3">
                 <div class="col-md-6 mb-3">
                     <label for="cep" class="form-label">CEP</label>
                     <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite seu CEP" required>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label for="pais" class="form-label">País</label>
-                    <input type="text" class="form-control" id="pais" name="pais" placeholder="Digite seu país" required>
-                </div>
+            
             </div>
-
-            <!-- Telefone de Contato -->
-            <div class="mb-3">
-                <label for="telefone" class="form-label">Telefone de Contato</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite seu número de telefone" required>
-            </div>
-
-            <!-- Botão de Envio -->
             <button type="submit" class="btn btn-primary">Finalizar Compra
             <?php
                 $numeroCartao = $_POST['numeroCartao'];
@@ -114,15 +88,13 @@
                 $validade   = $_POST['validade'];
                 $codigo = $_POST['codigo'];
                 $endereco = $_POST['endereco'];
-                $cidade = $_POST['cidade'];
-                $estado = $_POST['estado'];
                 $cep = $_POST['cep'];
-                $pais = $_POST['pais'];
-                $telefone = $_POST['telefone'];
+                
+                
 
                 $conexao = new Conexao();          
-                $compras = new Inserir();
-                echo $compra->compraLivro($conexao, $numeroCartao, $nomeCartao, $validade, $codigo, $endereco,$cidade,$estado,$cep,$pais,$telefone);
+                $compra = new Inserir();
+                echo $compra->compra($conexao, $numeroCartao, $nomeCartao, $validade, $codigo, $endereco, $cep);
             ?>
             </button>
         </form>

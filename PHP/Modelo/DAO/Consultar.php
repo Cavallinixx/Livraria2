@@ -1,8 +1,8 @@
 <?php
+
 namespace Projeto\Livraria2\PHP\Modelo;
 
 require_once('DAO/Conexao.php');
-
 use Projeto\Livraria2\PHP\Modelo\DAO\Conexao;
 
 class Consultar {
@@ -11,19 +11,21 @@ class Consultar {
     function consultarIndividual(
         Conexao $conexao,
         string $nomeTabela,
-        string $cpf
+        string $nomeCampo,
+        string $codigo
     ) {
         try {
             $conn = $conexao->conectar();
-            $sql = "SELECT * FROM $nomeTabela WHERE cpf = '$cpf'";
+            $sql = "SELECT * FROM $nomeTabela WHERE $nomeCampo = '$codigo'";
             $result = mysqli_query($conn, $sql);
 
             while ($dados = mysqli_fetch_Array($result)) {
-                if ($dados["cpf"] == $cpf) {
-                    echo "\nCPF: " . $dados["cpf"] .
-                         "\nNome: " . $dados["nome"] .
-                         "\nUsuário: " . $dados["usuario"] .
-                         "\nTelefone: " . $dados["telefone"];
+                if ($dados["cpf"] == $codigo) {
+                    echo "\nNome: " . $dados["nome"] .
+                         "\nUsuário: " . $dados["usuario"].
+                         "\nSenha: " . $dados["senha"] .
+                         "\nTelefone: " . $dados["telefone"].
+                         "\nCPF: " . $dados["cpf"];
                     return; // Encerrando o processo
                 }
             }
@@ -41,10 +43,10 @@ class Consultar {
             $result = mysqli_query($conn, $sql);
 
             while ($dados = mysqli_fetch_Array($result)) {
-                echo "<br>CPF: " . $dados["cpf"] .
-                     "<br>Nome: " . $dados["nome"] .
+                echo "<br>Nome: " . $dados["nome"] .
                      "<br>Usuário: " . $dados["usuario"] .
-                     "<br>Telefone: " . $dados["telefone"];
+                     "<br>Telefone: " . $dados["telefone"].
+                     "<br>CPF: " . $dados["cpf"];
             }
         } catch (Exception $erro) {
             echo $erro;

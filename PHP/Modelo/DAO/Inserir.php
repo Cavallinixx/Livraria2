@@ -19,10 +19,8 @@
         public string $validade;
         public string $codigo;
         public string $endereco;
-        public string $cidade;
-        public string $estado;
         public string $cep;
-        public string $pais;
+        
         
 
      
@@ -62,17 +60,15 @@
             string $validade,
             string $codigo,
             string $endereco,
-            string $cidade,
-            string $estado,
-            string $cep,
-            string $pais,
-            string $telefone
+            string $cep
+            
+            
             
         )
         {
             try{
                 $conn = $conexao->conectar();//Abrir a conexão com o banco
-                $sql  = "Insert into compraLivro(id, numeroCartao, nomeCartao, validade, codigo, endereco, cidade, estado, cep, pais, telefone,) values ('','$numeroCartao','$numeroCartao','$validade','$codigo','$endereco'','$cidade','$cep','$pais','$telefone')";
+                $sql  = "Insert into compraLivro(numeroCartao, nomeCartao, validade, codigo, endereco, cep) values ('$numeroCartao','$numeroCartao','$validade','$codigo','$endereco','$cep')";
                 $result = mysqli_query($conn, $sql);
 
                 
